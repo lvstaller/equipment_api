@@ -22,9 +22,11 @@ def validate_serial_number(serial_number):
         mask = equipment_type.serial_mask
 
         pattern = r""
-        for symbol in mask:
-            pattern += template[symbol]
-
+        try:
+            for symbol in mask:
+                pattern += template[symbol]
+        except:
+            continue
         if re.fullmatch(pattern, serial_number) is not None:
             return True, equipment_type.id
     return False, None
